@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh" data-theme="auto">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>伦敦麻辣烫业态分布图</title>
+<style>
+:root{
+  --bg:#f6f4ee; --card:#ffffff; --card2:#faf8f2; --ink:#26251f; --ink2:#5f5e57; --ink3:#8f8e85;
+  --line:#e4e0d6; --line2:#d0ccbf; --accent:#993c1d; --accent-bg:#faece7;
+  --coral0:#f0ddd4; --coral1:#eec0ac; --coral2:#e79c78; --coral3:#dc7048; --coral4:#c1481f; --coral5:#8f3517;
+  --teal:#0f6e56; --amber:#a8690f;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){ :root:not([data-theme="light"]){
+  --bg:#1c1b18; --card:#26251f; --card2:#2c2b24; --ink:#ece9e0; --ink2:#b4b2a8; --ink3:#87857c;
+  --line:#3a382f; --line2:#4a473c; --accent:#f0997b; --accent-bg:#3a231a;
+  --coral0:#3a2a23; --coral1:#5a3527; --coral2:#8f4a2c; --coral3:#c1481f; --coral4:#dc7048; --coral5:#f0997b;
+}}
+:root[data-theme="dark"]{
+  --bg:#1c1b18; --card:#26251f; --card2:#2c2b24; --ink:#ece9e0; --ink2:#b4b2a8; --ink3:#87857c;
+  --line:#3a382f; --line2:#4a473c; --accent:#f0997b; --accent-bg:#3a231a;
+  --coral0:#3a2a23; --coral1:#5a3527; --coral2:#8f4a2c; --coral3:#c1481f; --coral4:#dc7048; --coral5:#f0997b;
+}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:720px;margin:0 auto;padding:18px 15px 60px}
+header{display:flex;align-items:baseline;gap:10px;margin-bottom:4px}
+h1{font-size:20px;font-weight:600;margin:0}
+.themebtn{margin-left:auto;border:1px solid var(--line2);background:var(--card);color:var(--ink2);
+  border-radius:8px;padding:5px 11px;font-size:12px;cursor:pointer}
+.note{font-size:12px;color:var(--ink3);margin:6px 0 12px;line-height:1.6}
+.summary{font-size:13px;color:var(--ink2);margin-bottom:14px}
+.summary b{color:var(--ink);font-weight:600}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 15px;margin-bottom:14px}
+.card h2{font-size:14px;font-weight:600;margin:0 0 2px}
+.card .cs{font-size:11.5px;color:var(--ink3);margin-bottom:6px}
+svg{width:100%;height:auto;display:block;overflow:visible}
+.zlabel{font-size:11px;fill:var(--ink2)}
+.zlabel.b{font-size:11.5px;font-weight:600;fill:var(--ink)}
+.znum{font-size:13px;font-weight:700}
+.zc{cursor:pointer}
+.river{stroke:rgba(96,156,214,.34);stroke-width:12;fill:none;stroke-linecap:round}
+.riverlbl{font-size:10px;fill:rgba(96,156,214,.9);font-style:italic}
+.legend{font-size:10.5px;fill:var(--ink3)}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px;margin-bottom:14px}
+.phint{color:var(--ink3);font-size:13px;margin-bottom:12px}
+.conc{display:flex;flex-direction:column;gap:6px}
+.crow{display:grid;grid-template-columns:130px 1fr 22px;align-items:center;gap:9px;font-size:12.5px;cursor:pointer}
+.crow .cn{color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.crow .ct{height:15px;border-radius:5px;background:var(--coral3);min-width:3px}
+.crow .cv{color:var(--ink3);text-align:right}
+.crow:hover .cn{color:var(--accent)}
+.ptitle{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:2px}
+.ptitle h3{font-size:16px;font-weight:600;margin:0}
+.ptitle .cnt{font-size:12px;color:#fff;background:var(--accent);border-radius:20px;padding:1px 9px;font-weight:600}
+.psub{font-size:12px;color:var(--ink3);margin-bottom:12px}
+.facts{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+.fact{display:grid;grid-template-columns:74px 1fr;gap:10px;font-size:13px;align-items:start}
+.fact .fk{color:var(--ink3);font-size:12px;padding-top:1px}
+.fact .fv{color:var(--ink)}
+.fact.tip .fv{color:var(--accent);font-weight:500}
+.shoplist{border-top:1px solid var(--line);padding-top:11px}
+.shoplist .sh{font-size:12px;color:var(--ink3);margin-bottom:8px}
+.srow{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--line)}
+.srow:last-child{border-bottom:0}
+.srow a{color:var(--ink);text-decoration:none;font-weight:500;font-size:13.5px;display:inline-flex;align-items:center;gap:4px}
+.srow a:hover{color:var(--accent)}
+.srow a .ext{font-size:11px;color:var(--ink3)}
+.srow .meta{margin-left:auto;display:flex;align-items:center;gap:7px;white-space:nowrap}
+.pill{display:inline-block;padding:1px 7px;border-radius:20px;font-size:11px;border:1px solid transparent}
+.p-实体{background:rgba(15,110,86,.13);color:var(--teal);border-color:rgba(15,110,86,.25)}
+.p-外卖{background:rgba(193,72,31,.13);color:var(--coral4);border-color:rgba(193,72,31,.25)}
+.p-混合{background:rgba(168,105,15,.13);color:var(--amber);border-color:rgba(168,105,15,.25)}
+.rr{font-variant-numeric:tabular-nums;color:var(--ink2);font-size:12.5px}
+.na{color:var(--ink3)}
+.backbtn{border:1px solid var(--line2);background:var(--card2);color:var(--ink2);border-radius:8px;
+  padding:5px 11px;font-size:12px;cursor:pointer;margin-top:4px}
+.allgroup{margin-bottom:16px}
+.allgroup h3{font-size:13px;font-weight:600;margin:0 0 2px;color:var(--ink)}
+.allgroup .gc{font-size:11px;color:var(--ink3);margin-bottom:4px}
+.foot{font-size:11px;color:var(--ink3);margin-top:6px;line-height:1.7}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>伦敦麻辣烫业态分布图</h1>
+    <button class="themebtn" id="themebtn">深/浅色</button>
+  </header>
+  <div class="note">圈越大 = 该片区麻辣烫门店越密(冒菜 / 砂锅 / 小火锅同业态,一店一票)。点片区看门店分布、人群构成与选址要素;店名可点,直达 Google Maps。位置为示意排布,选址要素为定性判断(附近高校、人流、人群),非精确统计。</div>
+  <div class="summary" id="summary"></div>
+
+  <div class="card">
+    <h2>片区分布热力图</h2>
+    <div class="cs">点任意圈查看该片区门店与选址要素</div>
+    <div id="mapbox"></div>
+  </div>
+
+  <div class="panel" id="panel"></div>
+
+  <div class="card">
+    <h2>全部门店(按片区)</h2>
+    <div class="cs">店名可点,直达 Google Maps</div>
+    <div id="alllist"></div>
+    <div class="foot" id="foot"></div>
+  </div>
+</div>
+
+<script>
+const ZONES={
+ z1:{name:'Central West',sub:'Holborn·Bloomsbury·Fitzrovia',cx:450,cy:322,
+   pop:'大学生为主 + 白领',uni:'UCL、SOAS、Birkbeck、伦敦大学(全伦敦最密高校区)',
+   foot:'工作日全天 + 学期强,假期回落',tip:'目标客群最纯、需求最硬;但好铺难抢、租金高、门店最密'},
+ z2:{name:'Chinatown·Soho',sub:'',cx:352,cy:366,
+   pop:'游客 + 华人 + 夜生活人群',uni:'无核心高校(华人流量枢纽)',
+   foot:'傍晚 / 周末最旺,游客驱动',tip:'华人流量枢纽、天然对味;但租金极高、游客多于学生、餐饮饱和'},
+ z3:{name:'City East',sub:'Liverpool St·Aldgate·Stepney',cx:604,cy:312,
+   pop:'西端金融白领 / 东端 QMUL 学生 + 居民(孟加拉裔社区)',uni:'Queen Mary(Mile End / Whitechapel)',
+   foot:'Liverpool St 工作日午市金、周末空;Aldgate 一带更均衡',tip:'Aldgate / Whitechapel 一侧最贴学生客群;City 一侧偏白领、周末塌'},
+ z4:{name:'Shoreditch',sub:'Bethnal Green·Shadwell',cx:606,cy:222,
+   pop:'创意 / 科技年轻人 + 游客(Shoreditch);居民(BG / Shadwell)',uni:'无核心大学(近 QMUL 边缘)',
+   foot:'Shoreditch 傍晚 / 周末爆(市集、夜生活),偏游客+上班族',tip:'Spitalfields / Brick Lane 周末人流巨大;学生占比中等'},
+ z5:{name:'Tower Bridge',sub:'Bermondsey',cx:620,cy:410,
+   pop:'游客 + 河畔居民 + 部分白领',uni:'无',
+   foot:'游客驱动,周末强',tip:'游客驱动、学生密度低'},
+ z6:{name:'Battersea',sub:'Nine Elms',cx:300,cy:452,
+   pop:'新建高档住宅居民 + 使馆 / 办公(较富裕)',uni:'无核心高校',
+   foot:'新商圈(Battersea Power Station)人流上升,非学生核心',tip:'客群偏富裕居民,非学生核心'},
+ z7:{name:'Elephant & Castle',sub:'',cx:484,cy:432,
+   pop:'学生 + 多元社区(拉美裔集中)',uni:'LSBU 南岸大学、UAL 传媒学院',
+   foot:'学期强 + 居民日常,商圈改造中',tip:'有学生底盘、租金相对温和;区位偏南'},
+ z8:{name:'Canary Wharf',sub:'',cx:794,cy:384,
+   pop:'金融 / 办公白领(高消费)',uni:'无',
+   foot:'工作日午市金、傍晚周末偏空(住宅增长中)',tip:'客单高但人群非学生、周末塌'},
+ z9:{name:'Camden',sub:'',cx:444,cy:170,
+   pop:'年轻人 + 游客(市集)+ 部分学生',uni:'边缘(近 UCL 北侧)',
+   foot:'周末市集人流大,偏游客 / 潮流',tip:'人流足但偏游客、区位偏北'},
+ z10:{name:'Hammersmith',sub:'West London',cx:96,cy:360,
+   pop:'通勤白领 + 居民',uni:'较远(近 Imperial 白城 / 南肯)',
+   foot:'交通枢纽通勤流,学生密度低',tip:'西伦敦、通勤流为主,学生密度低'},
+ z11:{name:'Brent Cross',sub:'North West',cx:300,cy:82,
+   pop:'郊区居民 + 购物中心客流',uni:'无核心高校',
+   foot:'购物中心驱动,非学生核心',tip:'购物中心 / 居民驱动,学生密度低'},
+};
+const SHOPS=[
+ {cn:'王贵仁砂锅麻辣烫',en:'Mr Wong Malatang',z:'z1',r:4.9,type:'实体'},
+ {cn:'吃饱煲',en:'Chi Pot Pot',z:'z1',r:4.9,type:'实体'},
+ {cn:'夯大力麻辣烫',en:'Hang Noodle',z:'z1',r:4.9,type:'实体'},
+ {cn:'Mealtime 麻辣烫',en:'Mealtime Malatang',z:'z1',r:4.7,type:'实体'},
+ {cn:'大龙燚冒菜·麻辣香锅',en:'DaLongYi Pot',z:'z1',r:4.6,type:'外卖'},
+ {cn:'曹师傅麻辣烫',en:'Master Cao Malatang Southampton Row',z:'z1',r:null,type:'实体'},
+ {cn:'杨国福麻辣烫',en:'Yangguofu Malatang Chinatown',z:'z2',r:4.7,type:'实体'},
+ {cn:'张亮麻辣烫',en:'Zhangliang Malatang Chinatown',z:'z2',r:3.9,type:'实体'},
+ {cn:'冒泡小火锅',en:'Maopao Mini Hot Pot Liverpool Street',z:'z3',r:4.7,type:'外卖'},
+ {cn:'袍门世家火锅冒菜',en:'Pao Men Hotpot Aldgate',z:'z3',r:4.7,type:'实体'},
+ {cn:'麻辣烫大师',en:'Master Malatang Stepney',z:'z3',r:4.7,type:'外卖'},
+ {cn:'张亮麻辣烫',en:'Zhangliang Malatang Liverpool Street',z:'z3',r:4.6,type:'混合'},
+ {cn:'海底捞麻辣烫',en:'Hi Bowl Shoreditch',z:'z4',r:4.7,type:'外卖'},
+ {cn:'舌尖麻辣烫',en:'Tasty Malatang Shadwell',z:'z4',r:4.6,type:'混合'},
+ {cn:'SanPao 麻辣烫',en:'SanPao Malatang Bethnal Green',z:'z4',r:null,type:'外卖'},
+ {cn:'玉林川菜冒菜',en:'Yulin Sichuan Mao Cai Bethnal Green',z:'z4',r:null,type:'外卖'},
+ {cn:'海底捞麻辣烫',en:'Hi Bowl Tower Bridge',z:'z5',r:4.7,type:'外卖'},
+ {cn:'曹师傅麻辣烫',en:'Master Cao Malatang Butlers Wharf',z:'z5',r:4.6,type:'外卖'},
+ {cn:'海底捞麻辣烫',en:'Hi Bowl Battersea',z:'z6',r:4.7,type:'外卖'},
+ {cn:'舌尖麻辣烫',en:'Tasty Malatang Battersea Nine Elms',z:'z6',r:4.5,type:'外卖'},
+ {cn:'Getmore 小火锅',en:'Getmore Mini Hotpot Battersea',z:'z6',r:null,type:'外卖'},
+ {cn:'冒泡小火锅',en:'Maopao Mini Hot Pot Elephant and Castle',z:'z7',r:4.9,type:'实体'},
+ {cn:'New Beijing 冒菜香锅',en:'New Beijing Canary Wharf',z:'z8',r:4.5,type:'外卖'},
+ {cn:'Love & Spicy 麻辣烫',en:'Love and Spicy Malatang Canary Wharf',z:'z8',r:null,type:'外卖'},
+ {cn:'张亮麻辣烫',en:'Zhangliang Malatang Camden',z:'z9',r:4.3,type:'实体'},
+ {cn:'杨国福麻辣烫',en:'Yangguofu Malatang Hammersmith',z:'z10',r:4.5,type:'实体'},
+ {cn:'Getmore 麻辣烫',en:'Getmore Malatang Blythe Road Hammersmith',z:'z10',r:null,type:'外卖'},
+ {cn:'海底捞麻辣烫',en:'Hi Bowl Brent Cross',z:'z11',r:4.7,type:'外卖'},
+];
+const CORAL=['--coral0','--coral1','--coral2','--coral3','--coral4','--coral5'];
+const cv=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const gmap=s=>'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(s.en+' London');
+
+let state={sel:null};
+const shopsOf=k=>SHOPS.filter(s=>s.z===k);
+function counts(){const m={};for(const k in ZONES)m[k]=shopsOf(k).length;return m;}
+
+function renderSummary(){
+  const c=counts();let dense='—',dn=-1;for(const k in c){if(c[k]>dn){dn=c[k];dense=ZONES[k].name;}}
+  document.getElementById('summary').innerHTML=
+    `共 <b>${SHOPS.length}</b> 家门店 · <b>${Object.values(c).filter(x=>x>0).length}</b> 个片区 · 最密:<b>${dense}(${dn})</b>`;
+}
+
+function renderMap(){
+  const c=counts();const max=Math.max(1,...Object.values(c));
+  let s='<svg viewBox="0 0 900 486" role="img" aria-label="伦敦麻辣烫门店分布密度示意图">';
+  s+='<path class="river" d="M0,352 C150,372 260,382 400,388 S560,362 640,356 C740,348 830,372 900,338"/>';
+  s+='<text class="riverlbl" x="150" y="372">River Thames</text>';
+  const order=Object.keys(ZONES).sort((a,b)=>c[b]-c[a]);
+  for(const k of order){
+    const z=ZONES[k],n=c[k],ratio=n/max;
+    const rad=n===0?11:14+ratio*24;
+    const ci=n===0?0:Math.min(5,Math.max(1,Math.round(ratio*5)));
+    const strong=ratio>0.55, selected=state.sel===k, dim=state.sel&&!selected;
+    s+=`<g class="zc" data-z="${k}" style="opacity:${dim?0.34:1}">`;
+    s+=`<circle cx="${z.cx}" cy="${z.cy}" r="${rad}" fill="${cv(CORAL[ci])}" stroke="${selected?cv('--accent'):cv('--line2')}" stroke-width="${selected?2.5:1}"/>`;
+    if(n>0)s+=`<text class="znum" x="${z.cx}" y="${z.cy+4.5}" text-anchor="middle" fill="${strong?'#fff':cv('--coral5')}">${n}</text>`;
+    const ly=z.cy+rad+13;
+    s+=`<text class="zlabel b" x="${z.cx}" y="${ly}" text-anchor="middle">${z.name}</text>`;
+    if(z.sub)s+=`<text class="zlabel" x="${z.cx}" y="${ly+13}" text-anchor="middle">${z.sub}</text>`;
+    s+='</g>';
+  }
+  s+=`<text class="legend" x="20" y="466">圈越大 / 颜色越深 = 该片区麻辣烫门店越密</text>`;
+  s+='</svg>';
+  document.getElementById('mapbox').innerHTML=s;
+  document.querySelectorAll('.zc').forEach(g=>g.addEventListener('click',()=>{
+    const k=g.dataset.z;state.sel=state.sel===k?null:k;renderMap();renderPanel();
+    if(state.sel)document.getElementById('panel').scrollIntoView({behavior:'smooth',block:'nearest'});
+  }));
+}
+
+function shopRow(s){
+  const rat=s.r!=null?`<span class="rr">${s.r.toFixed(1)}</span>`:`<span class="rr na">—</span>`;
+  return `<div class="srow">
+    <a href="${gmap(s)}" target="_blank" rel="noopener noreferrer">${s.cn} <span class="ext">↗</span></a>
+    <span class="meta"><span class="pill p-${s.type}">${s.type}</span>${rat}</span></div>`;
+}
+
+function renderPanel(){
+  const p=document.getElementById('panel');
+  if(!state.sel){
+    const c=counts();const max=Math.max(1,...Object.values(c));
+    const rows=Object.keys(ZONES).map(k=>({k,n:c[k]})).sort((a,b)=>b.n-a.n);
+    p.innerHTML=`<div class="phint">点上方任意片区,查看它的门店分布、人群构成与选址要素。下面是各片区门店数(点行也可展开):</div>
+      <div class="conc">${rows.map(r=>`<div class="crow" data-z="${r.k}">
+        <span class="cn">${ZONES[r.k].name}</span>
+        <span class="ct" style="width:${r.n/max*100}%"></span>
+        <span class="cv">${r.n}</span></div>`).join('')}</div>`;
+    p.querySelectorAll('.crow').forEach(r=>r.addEventListener('click',()=>{
+      state.sel=r.dataset.z;renderMap();renderPanel();}));
+    return;
+  }
+  const z=ZONES[state.sel],list=shopsOf(state.sel);
+  p.innerHTML=`
+    <div class="ptitle"><h3>${z.name}</h3><span class="cnt">${list.length} 家</span></div>
+    <div class="psub">${z.sub||''}</div>
+    <div class="facts">
+      <div class="fact"><span class="fk">主要人群</span><span class="fv">${z.pop}</span></div>
+      <div class="fact"><span class="fk">附近高校</span><span class="fv">${z.uni}</span></div>
+      <div class="fact"><span class="fk">人流特征</span><span class="fv">${z.foot}</span></div>
+      <div class="fact tip"><span class="fk">选址提示</span><span class="fv">${z.tip}</span></div>
+    </div>
+    <div class="shoplist"><div class="sh">该片区门店(店名→Google Maps)</div>
+      ${list.map(shopRow).join('')}</div>
+    <button class="backbtn" id="backbtn">← 返回全部片区</button>`;
+  document.getElementById('backbtn').addEventListener('click',()=>{
+    state.sel=null;renderMap();renderPanel();});
+}
+
+function renderAll(){
+  const c=counts();
+  const order=Object.keys(ZONES).sort((a,b)=>c[b]-c[a]);
+  let h='';
+  for(const k of order){
+    const list=shopsOf(k);if(!list.length)continue;
+    h+=`<div class="allgroup"><h3>${ZONES[k].name} <span style="color:var(--ink3);font-weight:400">· ${list.length} 家</span></h3>
+      <div class="gc">${ZONES[k].sub||''}</div>${list.map(shopRow).join('')}</div>`;
+  }
+  document.getElementById('alllist').innerHTML=h;
+  document.getElementById('foot').textContent='评分跨平台不可直接比较(Google 分布宽、外卖平台偏高),仅作参考。';
+}
+
+function render(){renderSummary();renderMap();renderPanel();renderAll();}
+
+document.getElementById('themebtn').addEventListener('click',()=>{
+  const h=document.documentElement,cur=h.getAttribute('data-theme');
+  const dark=cur==='dark'||(cur==='auto'&&matchMedia('(prefers-color-scheme:dark)').matches);
+  h.setAttribute('data-theme',dark?'light':'dark');render();});
+
+render();
+</script>
+</body>
+</html>
